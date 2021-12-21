@@ -35,6 +35,7 @@ int main(int argc, char **argv)
 	int g_s[10]={-91, -32, -14, 2, 13, 38, 45, 70, 77, 89};
 	add_array_to_list(&arrayList, g, g_s, 10);
 	
+	printf("\n");
 	test_selection_sort(arrayList);	
 	test_recursive_selection_sort(arrayList);
 	
