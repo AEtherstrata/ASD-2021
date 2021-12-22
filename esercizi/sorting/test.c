@@ -242,27 +242,31 @@ void test_all_sort(list* test)
 	if (test_quick_sort(test)) set_bit(&result, 8);
 
 	// Display results
-	if ((result & (1 << (1%32) )) != 0) printf("BUBBLE SORT           :   OK\n");
-	else printf("BUBBLE SORT           :   FAILED\n");
+	printf("  /------------ SUMMARY -----------\\\n");
 
-	if ((result & (1 << (2%32) )) != 0) printf("BUBBLE SORT (R)       :   OK\n");
-	else printf("BUBBLE SORT (R)       :   FAILED\n");
+	if ((result & (1 << (1%32) )) != 0) printf("  |  BUBBLE SORT           :   OK  |\n");
+	else printf("  |  BUBBLE SORT           :   FAILED\n");
 
-	if ((result & (1 << (3%32) )) != 0) printf("SELECTION SORT        :   OK\n");
-	else printf("SELECTION SORT        :   FAILED\n");
+	if ((result & (1 << (2%32) )) != 0) printf("  |  BUBBLE SORT (R)       :   OK  |\n");
+	else printf("  |  BUBBLE SORT (R)       :   FAILED\n");
 
-	if ((result & (1 << (4%32) )) != 0) printf("SELECTION SORT (R)    :   OK\n");
-	else printf("SELECTION SORT (R)    :   FAILED\n");
+	if ((result & (1 << (3%32) )) != 0) printf("  |  SELECTION SORT        :   OK  |\n");
+	else printf("  |  SELECTION SORT        :   FAILED\n");
 
-	if ((result & (1 << (5%32) )) != 0) printf("INSERITION SORT       :   OK\n");
-	else printf("INSERITION SORT       :   FAILED\n");
+	if ((result & (1 << (4%32) )) != 0) printf("  |  SELECTION SORT (R)    :   OK  |\n");
+	else printf("  |  SELECTION SORT (R)    :   FAILED\n");
 
-	if ((result & (1 << (6%32) )) != 0) printf("INSERITION SORT (R)   :   OK\n");
-	else printf("INSERITION SORT (R)   :   FAILED\n");
+	if ((result & (1 << (5%32) )) != 0) printf("  |  INSERITION SORT       :   OK  |\n");
+	else printf("  |  INSERITION SORT       :   FAILED\n");
 
-	if ((result & (1 << (7%32) )) != 0) printf("MERGE SORT            :   OK\n");
+	if ((result & (1 << (6%32) )) != 0) printf("  |  INSERITION SORT (R)   :   OK  |\n");
+	else printf("  |  INSERITION SORT (R)   :   FAILED\n");
+
+	if ((result & (1 << (7%32) )) != 0) printf("  |  MERGE SORT            :   OK  |\n");
 	else printf("MERGE SORT            :   FAILED\n");
 
-	if ((result & (1 << (8%32) )) != 0) printf("QUICK SORT            :   OK\n");
-	else printf("QUICK SORT            :   FAILED\n");
+	if ((result & (1 << (8%32) )) != 0) printf("  |  QUICK SORT            :   OK  |\n");
+	else printf("  |  QUICK SORT            :   FAILED\n");
+
+	printf("  \\--------------------------------/\n");
 }
