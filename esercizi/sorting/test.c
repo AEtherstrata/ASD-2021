@@ -108,3 +108,15 @@ void test_merge_sort(list* test)
 		test=test->next;
 	}
 }
+
+void test_quick_sort(list* test)
+{
+	printf("/---- Quick Sort ----\\\n\n");
+	
+	while(test!=NULL){
+		copy_array(test->original, test->result, test->len);
+		begin_quick_sort(test->result, test->len);
+		test_array(test);
+		test=test->next;
+	}
+}

@@ -7,6 +7,7 @@
 #include "selection-sort.h"
 #include "insertion-sort.h"
 #include "merge-sort.h"
+#include "quick-sort.h"
 
 void test_array(list* test);
 
@@ -20,5 +21,7 @@ void test_insertion_sort(list* test);
 void test_recursive_insertion_sort(list* test);
 
 void test_merge_sort(list* test);
+
+void test_quick_sort(list* test);
 
 #endif

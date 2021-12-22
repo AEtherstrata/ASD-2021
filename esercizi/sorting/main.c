@@ -46,8 +46,9 @@ int main()
 	test_insertion_sort(arrayList);
 	test_recursive_insertion_sort(arrayList);
 	
-	test_merge_sort(arrayList );
+	test_merge_sort(arrayList);
 	
+	test_quick_sort(arrayList);
 	//TODO: merge sort
 	
 	return 0;
