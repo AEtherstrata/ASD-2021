@@ -13,10 +13,6 @@
 *.map
 *.exp
 
-# Precompiled Headers
-*.gch
-*.pch
-
 # Libraries
 *.lib
 *.a
@@ -37,39 +33,5 @@
 *.x86_64
 *.hex
 
-# Debug files
-*.dSYM/
-*.su
-*.idb
-*.pdb
-
-# Kernel Module Compile Results
-*.mod*
-*.cmd
-.tmp_versions/
-modules.order
-Module.symvers
-Mkfile.old
-dkms.conf
-
-### Codelite ###
-# Configuration files
-*.workspace
-*.project
-
-# Makefiles
-Makefile
-*.mk
-
-# User files
-.codelite
-tags
-
-# Temporary files
-*.dat
-*.session
-*.txt
-
-
 # Build folder
-build*
+build/
