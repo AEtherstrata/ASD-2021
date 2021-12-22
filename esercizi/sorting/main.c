@@ -1,10 +1,10 @@
 #include "test.h"
 
-int main(int argc, char **argv)
+int main()
 {
 	list* arrayList = NULL;
 	
-	int empty[0];
+	int* empty = NULL;
 	add_array_to_list(&arrayList, empty, empty, 0);
 	
 	int a[10]={0, -1, 4, 5, 1, 8, 8, 5, 3, -6};
