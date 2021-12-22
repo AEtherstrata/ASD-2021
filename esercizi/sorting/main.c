@@ -36,6 +36,10 @@ int main()
 	add_array_to_list(&arrayList, g, g_s, 10);
 	
 	printf("\n");
+
+	test_bubble_sort(arrayList);
+	test_recursive_bubble_sort(arrayList);
+
 	test_selection_sort(arrayList);	
 	test_recursive_selection_sort(arrayList);
 	

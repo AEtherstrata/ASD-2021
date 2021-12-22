@@ -25,6 +25,30 @@ void test_array(list* test)
 	
 }
 
+void test_bubble_sort(list* test)
+{
+	printf("/---- Bubble Sort ----\\\n\n");
+	
+	while(test!=NULL){
+		copy_array(test->original, test->result, test->len);
+		bubble_sort(test->result, test->len);
+		test_array(test);
+		test=test->next;
+	}
+}
+
+void test_recursive_bubble_sort(list* test)
+{
+	printf("/---- Bubble Sort (R) ----\\\n\n");
+	
+	while(test!=NULL){
+		copy_array(test->original, test->result, test->len);
+		bubble_sort_ric(test->result, test->len);
+		test_array(test);
+		test=test->next;
+	}
+}
+
 void test_selection_sort(list* test)
 {
 	printf("/---- Selection Sort ----\\\n\n");
