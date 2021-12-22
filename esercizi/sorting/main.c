@@ -37,19 +37,7 @@ int main()
 	
 	printf("\n");
 
-	test_bubble_sort(arrayList);
-	test_recursive_bubble_sort(arrayList);
+	test_all_sort(arrayList);
 
-	test_selection_sort(arrayList);	
-	test_recursive_selection_sort(arrayList);
-	
-	test_insertion_sort(arrayList);
-	test_recursive_insertion_sort(arrayList);
-	
-	test_merge_sort(arrayList);
-	
-	test_quick_sort(arrayList);
-	//TODO: merge sort
-	
 	return 0;
 }

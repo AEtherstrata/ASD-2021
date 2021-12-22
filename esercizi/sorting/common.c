@@ -42,3 +42,9 @@ void add_array_to_list(list** l, int* original, int* expected, int len)
 	newElement->next=*l;
 	*l=newElement;
 }
+
+/* Sets a bit of an int to 1 */
+void set_bit(int* var, int k)
+{
+	*var |= 1 << (k%32);
+}

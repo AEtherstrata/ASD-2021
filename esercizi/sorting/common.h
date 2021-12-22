@@ -20,4 +20,6 @@ void copy_array(int* origin, int* destination, int len);
 
 void add_array_to_list(list** l, int* original, int* expected, int len);
 
+void set_bit(int* var, int k);
+
 #endif
