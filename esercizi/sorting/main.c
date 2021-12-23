@@ -37,7 +37,7 @@ int main()
 	
 	printf("\n");
 	test_all_sort(arrayList);
-	printf("Press any key to continue ");
+	printf("Press enter to continue ");
 	getchar();
 
 	return 0;

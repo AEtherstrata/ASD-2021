@@ -8,6 +8,12 @@
 // (Last-in - First-out)
 // This example is an integer stack
 
+// INVALID is an arbitraty value that cannot reside in the stack.
+// In this example the stack contains a list of userids and 
+// they are expected to be positive integers.
+
+#define INVALID -1;
+
 typedef struct STACK_STRUCT {
 	int* data;
 	int top;
@@ -16,16 +22,18 @@ typedef struct STACK_STRUCT {
 
 stack* new_stack(int maxsize);
 
+void print_stack(stack* stack);
+
 int is_empty(stack* stack);
 
 void push(stack* stack, int value);
 
-void pop(stack* stack, int* target);
+int pop(stack* stack);
 
-void top(stack* stack);
+int top(stack* stack);
 
 void empty(stack* stack);
 
-void size(stack* stack);
+int size(stack* stack);
 
 #endif

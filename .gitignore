@@ -37,3 +37,6 @@
 # Temporary files
 *.log
 build/ 
+
+# VS Code configuration files
+.vscode/

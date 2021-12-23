@@ -9,22 +9,68 @@ stack* new_stack(int size)
 	return newStack;
 }
 
-void push(stack* stack, int value)
+void print_stack(stack* stack)
 {
-	if (stack->top == stack->len-1)	{
-		printf("OVERFLOW: The stack is full.\n");
+	printf("STACK: [ ");
+	if (stack->len == 0) {
+		printf("]\n");
 	} else {
-		stack->top++;
-		stack->data[stack->top] = value;
+		for (int i = 0; i < stack->len-1; i++) {
+			printf("%d | ", stack->data[i]);
+		}
+		printf("%d ]\n", stack->data[stack->len-1]);
 	}
 }
 
-void pop(stack* stack, int* target)
+int is_empty(stack* stack)
+{	
+	return stack->top == -1;
+}
+
+void push(stack* stack, int value)
 {
+	if (stack->top == stack->len-1)	{
+		printf("OVERFLOW: The stack is full. Expanding...\n");
+		stack->data = (int*)realloc(stack->data, stack->len * 2);
+		stack->len *= 2;
+		printf("      The array can now contain %d elements.\n", stack->len);
+	} 
+	printf("[PUSH] (%d) ", value);
+	stack->top++;
+	stack->data[stack->top] = value;
+	printf("%d has been pushed to the stack.\n", value);
+	printf("      The stack is now %d elements long.\n", size(stack));
+	print_stack(stack);
+}
+
+int pop(stack* stack)
+{
+	printf("[POP] ");
+
 	if(stack->top == -1){
 		printf("UNDERFLOW: The stack is already empty.\n");
+		print_stack(stack);
+		return INVALID; // This is an arbitrary number. It should be an invalid value for the stack.
 	} else {
 		stack->top--;
-		*target = stack->data[stack->top+1];
+		printf("%d has been popped from the stack.\n", stack->data[stack->top+1]);
+		printf("     The stack is now %d elements long.\n", size(stack));
+		print_stack(stack);
+		return stack->data[stack->top+1];
 	}
+}
+
+int top(stack* stack)
+{
+	return stack->data[stack->top];
+}
+
+void empty(stack* stack)
+{
+	stack->top = -1;
+}
+
+int size(stack* stack)
+{
+	return stack->top + 1;
 }
