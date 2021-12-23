@@ -268,5 +268,5 @@ void test_all_sort(list* test)
 	if ((result & (1 << (8%32) )) != 0) printf("  |  QUICK SORT            :   OK  |\n");
 	else printf("  |  QUICK SORT            :   FAILED\n");
 
-	printf("  \\--------------------------------/\n");
+	printf("  \\--------------------------------/\n\n");
 }

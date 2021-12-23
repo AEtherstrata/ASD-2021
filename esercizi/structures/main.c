@@ -8,5 +8,9 @@ int main(){
 	int popValue;
 	pop(testStack, &popValue);
 	printf("popped: %d\n", popValue);
+
+	printf("Press any key to continue ");
+	getchar();
+	
 	return 0;
 }

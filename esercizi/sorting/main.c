@@ -36,8 +36,9 @@ int main()
 	add_array_to_list(&arrayList, g, g_s, 10);
 	
 	printf("\n");
-
 	test_all_sort(arrayList);
+	printf("Press any key to continue ");
+	getchar();
 
 	return 0;
 }
