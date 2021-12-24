@@ -2,10 +2,17 @@
 
 stack* new_stack(int size)
 {
+	// Allocate a new stack and set its fields
 	stack* newStack = (stack*)malloc(sizeof(stack));
 	newStack->data = (int*)malloc(size*sizeof(int));
 	newStack->top = -1;
 	newStack->len = size;
+
+	// Initialise all indices to 0
+	for (int i = 0; i < newStack->len; i++) {
+		newStack->data[i] = 0;
+	}
+
 	return newStack;
 }
 
@@ -32,6 +39,12 @@ void push(stack* stack, int value)
 	if (stack->top == stack->len-1)	{
 		printf("OVERFLOW: The stack is full. Expanding...\n");
 		stack->data = (int*)realloc(stack->data, stack->len * 2);
+
+		/* Set all new indices to 0 */
+		for (int i = stack->len; i < stack->len * 2; i++) {
+			stack->data[i] = 0;
+		}
+
 		stack->len *= 2;
 		printf("      The array can now contain %d elements.\n", stack->len);
 	} 
