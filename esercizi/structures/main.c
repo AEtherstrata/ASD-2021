@@ -1,29 +1,22 @@
-#include "stack.h"
+#include "test.h"
 
 int main()
 {
+	// Store the test values in an array
+	uidlist* osuID = (uidlist*)malloc(sizeof(uidlist));
+	int array[19] = {11139199, 10527981, 12317880, 17703611, 20339031, 6680297,
+					 7537836,  10657916, 11307288, 14766959, 9506297,  9093999,
+					 14802064, 13134974, 18722281, 10668442, 12699783, 15153250,
+					 11514124};
+
+	osuID->data = array;
+	osuID->len = 19;
+
 	// Create a new stack
 	stack* testStack = new_stack(10);
 
-	push(testStack, 11139199);	
-	push(testStack, 10527981);
-	push(testStack, 12317880);
-	push(testStack, 17703611);
-	push(testStack, 20339031);
-	push(testStack, 6680297);
-	push(testStack, 7537836);
-	push(testStack, 10657916);
-	push(testStack, 11307288);
-	push(testStack, 14766959);
-	push(testStack, 9506297);
-	push(testStack, 9093999);
-	push(testStack, 14802064);
-	push(testStack, 13134974);
-	push(testStack, 18722281);
-	push(testStack, 10668442);
-	push(testStack, 12699783);
-	push(testStack, 15153250);
-	push(testStack, 11514124);
+	// Test the stack
+	test_stack(testStack, osuID);
 
 	printf("Press enter to continue ");
 	getchar();

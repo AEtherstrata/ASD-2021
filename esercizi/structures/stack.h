@@ -6,7 +6,7 @@
 
 // Stacks make a LIFO storage
 // (Last-in - First-out)
-// This example is an integer stack
+// This example is an integer array stack
 
 // INVALID is an arbitraty value that cannot reside in the stack.
 // In this example the stack contains a list of userids and 

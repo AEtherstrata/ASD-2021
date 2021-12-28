@@ -37,7 +37,7 @@ int is_empty(stack* stack)
 void push(stack* stack, int value)
 {
 	if (stack->top == stack->len-1)	{
-		printf("OVERFLOW: The stack is full. Expanding...\n");
+		printf("[PUSH] (%d) OVERFLOW: The stack is full. Expanding...\n", value);
 		stack->data = (int*)realloc(stack->data, stack->len * 2);
 
 		/* Set all new indices to 0 */
@@ -47,6 +47,8 @@ void push(stack* stack, int value)
 
 		stack->len *= 2;
 		printf("      The array can now contain %d elements.\n", stack->len);
+		print_stack(stack);
+		printf("  /---------------------/\n");
 	} 
 	printf("[PUSH] (%d) ", value);
 	stack->top++;
@@ -54,6 +56,7 @@ void push(stack* stack, int value)
 	printf("%d has been pushed to the stack.\n", value);
 	printf("      The stack is now %d elements long.\n", size(stack));
 	print_stack(stack);
+	printf("  /---------------------/\n");
 }
 
 int pop(stack* stack)
@@ -63,12 +66,14 @@ int pop(stack* stack)
 	if(stack->top == -1){
 		printf("UNDERFLOW: The stack is already empty.\n");
 		print_stack(stack);
-		return INVALID; // This is an arbitrary number. It should be an invalid value for the stack.
+		printf("  /---------------------/\n");
+		return INVALID; // This is an arbitrary number. See stack.h for info.
 	} else {
 		stack->top--;
 		printf("%d has been popped from the stack.\n", stack->data[stack->top+1]);
 		printf("     The stack is now %d elements long.\n", size(stack));
 		print_stack(stack);
+		printf("  /---------------------/\n");
 		return stack->data[stack->top+1];
 	}
 }
