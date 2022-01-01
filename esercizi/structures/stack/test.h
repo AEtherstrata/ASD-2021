@@ -1,13 +1,14 @@
 #include "stack.h"
 
-typedef struct USER_ID_ARRAY
-{
+typedef struct USER_ID_ARRAY {
 	int* data;
 	int len;
-} uidlist;
+} osuProfile;
+
+// Test stack
 
 int test_push(stack* stack, int exp);
 
 int test_pop(stack* stack ,int exp);
 
-void test_stack(stack* stack, uidlist* osuID);
+void test_stack(stack* stack, osuProfile* osuID);

@@ -9,6 +9,7 @@ stack* new_stack(int size)
 	newStack->len = size;
 
 	// Initialise all indices to 0
+	// To get theta(1) remove this or use calloc instead of malloc
 	for (int i = 0; i < newStack->len; i++) {
 		newStack->data[i] = 0;
 	}
@@ -36,11 +37,12 @@ int is_empty(stack* stack)
 
 void push(stack* stack, int value)
 {
-	if (stack->top == stack->len-1)	{
+	if (size(stack) == stack->len)	{
 		printf("[PUSH] (%d) OVERFLOW: The stack is full. Expanding...\n", value);
 		stack->data = (int*)realloc(stack->data, stack->len * 2);
 
 		/* Set all new indices to 0 */
+		// To get theta(1) remove this
 		for (int i = stack->len; i < stack->len * 2; i++) {
 			stack->data[i] = 0;
 		}
@@ -63,7 +65,7 @@ int pop(stack* stack)
 {
 	printf("[POP] ");
 
-	if(stack->top == -1){
+	if(is_empty(stack)){
 		printf("UNDERFLOW: The stack is already empty.\n");
 		print_stack(stack);
 		printf("  /---------------------/\n");

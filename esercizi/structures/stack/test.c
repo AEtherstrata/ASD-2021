@@ -9,10 +9,10 @@ int test_push(stack* stack, int exp)
 int test_pop(stack* stack , int exp)
 {
 	int popped = pop(stack);
-	return exp = stack->data[stack->top+1];
+	return exp == popped;
 }
 
-void test_stack(stack* stack, uidlist* osuID)
+void test_stack(stack* stack, osuProfile* osuID)
 {
 	int good = 0;
 
