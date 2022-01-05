@@ -14,6 +14,8 @@ stack* new_stack(int size)
 		newStack->data[i] = 0;
 	}
 
+	printf("A new stack has been created at %d and can contain %d elements.\n", newStack, newStack->len);
+
 	return newStack;
 }
 
@@ -24,7 +26,11 @@ void print_stack(stack* stack)
 		printf("]\n");
 	} else {
 		for (int i = 0; i < stack->len-1; i++) {
-			printf("%d | ", stack->data[i]);
+			if (i == stack->top) {
+				printf("%d < ", stack->data[i]);
+			} else {
+				printf("%d | ", stack->data[i]);
+			}
 		}
 		printf("%d ]\n", stack->data[stack->len-1]);
 	}
@@ -40,7 +46,7 @@ void push(stack* stack, int value)
 	if (size(stack) == stack->len)	{
 		printf("[PUSH] (%d) OVERFLOW: The stack is full. Expanding...\n", value);
 		stack->data = (int*)realloc(stack->data, stack->len * 2);
-
+		
 		/* Set all new indices to 0 */
 		// To get theta(1) remove this
 		for (int i = stack->len; i < stack->len * 2; i++) {

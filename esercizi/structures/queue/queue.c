@@ -14,6 +14,8 @@ queue* new_queue(int maxSize)
 		newQueue->data[i] = 0;
 	}
 
+	printf("A new queue has been created at %d and can contain %d elements.\n", newQueue, newQueue->len);
+	
 	return newQueue;
 }
 

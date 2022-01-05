@@ -24,7 +24,7 @@ void test_queue(queue* queue, osuProfile* osuID)
 		good = test_enqueue(queue, osuID->data[i]);
 		if (!good) goto end;
 	
-		// Pop an ID once in a while
+		// Dequeue an ID once in a while
 		if(rand()%7==0){
 			good = test_dequeue(queue, osuID->data[qCount]);
 			if (!good) goto end;
