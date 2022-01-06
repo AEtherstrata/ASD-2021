@@ -39,6 +39,12 @@ int dequeue(qas* queue)
 {
 	printf("\n|========= DEQUEUE FIRST ELEMENT =========|\n\n");
 
+	if (is_empty(queue->entranceStack) == 0 && is_empty(queue->exitStack) == 0)	{
+		printf("UNDERFLOW: The queue is empty!\n\n");
+		return INVALID;
+	}
+	
+
 	if (queue->lastOp == 1)	{
 		printf("The exitStack is out of sync. Copying the elements...\n\n");
 		flip_stack(queue->exitStack, queue->entranceStack);
