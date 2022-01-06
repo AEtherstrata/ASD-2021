@@ -12,7 +12,7 @@
 // In this example the queue contains a list of userids and 
 // they are expected to be positive integers.
 
-#define INVALID -1;
+#define INVALID -1
 
 typedef struct QUEUE_STRUCT {
 	int* data;

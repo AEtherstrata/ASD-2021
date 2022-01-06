@@ -87,7 +87,6 @@ void enqueue(queue* queue, int value)
 	printf("      The queue is now %d elements long.\n", size(queue));
 	print_queue(queue);
 	printf("  /---------------------/\n");
-
 }
 
 int dequeue(queue* queue)

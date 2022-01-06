@@ -12,7 +12,7 @@
 // In this example the stack contains a list of userids and 
 // they are expected to be positive integers.
 
-#define INVALID -1;
+#define INVALID -1
 
 typedef struct STACK_STRUCT {
 	int* data;
