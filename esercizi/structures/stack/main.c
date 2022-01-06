@@ -12,7 +12,7 @@ int main()
 	osuID->data = array;
 	osuID->len = 19;
 
-	// Create a new stack
+	// Create a new test stack
 	stack* testStack = new_stack(10);
 
 	// Test the stack

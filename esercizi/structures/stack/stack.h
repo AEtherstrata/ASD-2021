@@ -16,8 +16,8 @@
 
 typedef struct STACK_STRUCT {
 	int* data;
-	int top;
-	int len;
+	int top; // Index of the last element
+	int len; // Length of the data array
 } stack;
 
 // Create a new stack and return its pointer
