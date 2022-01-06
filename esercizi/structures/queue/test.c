@@ -3,7 +3,7 @@
 int test_enqueue(queue* queue, int exp)
 {
 	enqueue(queue, exp);
-	if (queue->tail-1 == -1) return exp == queue->data[queue->len-1];
+	if (queue->tail == 0) return exp == queue->data[queue->len-1];
 	return exp == queue->data[queue->tail-1];
 }
 

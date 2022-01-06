@@ -31,8 +31,8 @@ void test_stack_as_queue(saq* stack, osuProfile* osuID)
 
 	end:
 	if (good) {
-		printf("STACK :   OK\n");
+		printf("STACK AS QUEUE :   OK\n");
 	} else {
-		printf("STACK : FAILED\n");
+		printf("STACK AS QUEUE : FAILED\n");
 	}
 }

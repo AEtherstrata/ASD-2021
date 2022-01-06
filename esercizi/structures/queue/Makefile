@@ -5,4 +5,4 @@ all: main.c queue.c test.c
 	gcc main.c queue.c test.c -o ../build/queue-test -I.
 
 run: all
-	@../build/-test
+	@../build/queue-test
