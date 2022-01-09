@@ -25,6 +25,8 @@ int is_empty(list* list);
 
 void empty(list* list);
 
+listItem* search(list* list, int value);
+
 void add_head(list* list, int value);
 
 void add_tail(list* list, int value);
@@ -34,5 +36,7 @@ void delete_element(list* list, listItem* item);
 void delete_head(list* list);
 
 void delete_tail(list* list);
+
+void delete_value(list* list, int value);
 
 #endif

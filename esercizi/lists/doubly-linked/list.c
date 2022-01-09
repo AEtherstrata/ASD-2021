@@ -20,12 +20,8 @@ listItem* allocate_object(int a)
 void print_list(list* l)
 {
 	if(is_empty(l)) {
-		printf("Empty list.\n");
-		printf("HEAD == LAST = %d\n", l->head==l->last);
-		printf("HEAD == NULL = %d\n", l->head==NULL);
-		printf("LAST == NULL = %d\n\n", l->last==NULL);
-	}
-	else {
+		printf("Empty list.\n\n");
+	} else {
 		listItem* i = l->head;
 		while (i != NULL)
 		{
@@ -47,6 +43,7 @@ void empty(list* l)
 	listItem* p = l->head;
 
 	printf("Emptying the list:\n");
+	
 	while (l->head != NULL)
 	{
 		l->head = l->head->next;
@@ -56,10 +53,18 @@ void empty(list* l)
         p = l->head;
 	}
 
-	l->head == NULL;
-	l->last == NULL;
-
 	print_list(l);
+}
+
+listItem* search(list* l, int a)
+{
+	listItem* i = l->head;
+	while (i != NULL) {
+		if ( i->data == a )
+			return i;
+		i = i->next;
+	}
+	return NULL;
 }
 
 void add_head(list* l, int a)
@@ -70,8 +75,6 @@ void add_head(list* l, int a)
 	if(!is_empty(l)) l->head->prev = add;
 	l->head = add;
 	printf("%d has been added to the head.\n", add->data);
-	
-	print_list(l);
 }
 
 void add_tail(list* l, int a)
@@ -87,14 +90,14 @@ void add_tail(list* l, int a)
 	l->last = add;
 
 	printf("%d has been added to the tail.\n", add->data);
-	
-	print_list(l);
 }
 
 void delete_element(list* l, listItem* i)
 {
-	printf("%d has been deleted.\n", i->data);
+	printf("%d has been deleted.\n\n", i->data);
 	
+	if( i == NULL ) return;
+
 	if (i->prev != NULL) {
 		i->prev->next = i->next;
 	} else {
@@ -112,12 +115,15 @@ void delete_element(list* l, listItem* i)
 
 void delete_head(list* l)
 {
-	listItem* i = l->head;
-	delete_element(l , i);
+	delete_element(l , l->head);
 }
 
 void delete_tail(list* l)
 {
-	listItem* i = l->last;
-	delete_element(l , i);
+	delete_element(l , l->last);
+}
+
+void delete_value(list* l, int a)
+{
+	delete_element(l, search(l, a));
 }
