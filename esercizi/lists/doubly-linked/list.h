@@ -31,6 +31,10 @@ void add_head(list* list, int value);
 
 void add_tail(list* list, int value);
 
+void add_before(list* l, listItem* i, int a);
+
+void add_after(list* l, listItem* i, int a);
+
 void delete_element(list* list, listItem* item);
 
 void delete_head(list* list);
@@ -38,5 +42,11 @@ void delete_head(list* list);
 void delete_tail(list* list);
 
 void delete_value(list* list, int value);
+
+int common(list* list1, list* list2);
+
+list* reverse(list* list);
+
+void list_enqueue(list* l1, list* l2);
 
 #endif
