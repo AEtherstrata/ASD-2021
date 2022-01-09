@@ -21,6 +21,8 @@ int main()
 	print_list(test2);
 
 	test2 = sort(test2);
+	test1 = sort(test1);
+	print_list(test1);
 	print_list(test2);
 
 	test3 = merge(test1, test2);

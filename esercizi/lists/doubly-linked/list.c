@@ -256,79 +256,23 @@ list* merge(list* l1, list* l2)
 	{
 		if (i1->data <= i2->data) // Precedence yielded to list1
 		{
-			// Transfer item from list1...
-			l1->head = l1->head->next;
-			if(	!is_empty(l1) ) {
-				l1->head->prev = NULL;
-			}
-			// ... to head of merged list
-			if( is_empty(merged) ){
-				merged->last = i1;
-			}
-			if( !is_empty(merged) ){
-				merged->head->prev = i1;
-			}
-			i1->next = merged->head;
-			i1->prev = NULL;
-			merged->head = i1;
-			i1 = l1->head;
-		} else {		
-			// Transfer item from list2...
-			l2->head = l2->head->next;
-			if(	!is_empty(l2) ) {
-				l2->head->prev = NULL;
-			}
-			// ... to head of merged list
-			if( is_empty(merged) ){
-				merged->last = i2;
-			}
-			if( !is_empty(merged) ){
-				merged->head->prev = i2;
-			}
-			i2->next = merged->head;
-			i2->prev = NULL;
-			merged->head = i2;
-			i2 = l2->head;
+			add_tail(merged, i1->data);
+			i1 = i1->next;
+		} else {
+			add_tail(merged, i2->data);
+			i2 = i2->next;
 		}
 		
 	}
 	while (i1 != NULL)
 	{
-		// Transfer item from list1...
-		l1->head = l1->head->next;
-		if(	!is_empty(l1) ) {
-			l1->head->prev = NULL;
-		}
-		// ... to head of merged list
-		if( is_empty(merged) ){
-			merged->last = i1;
-		}
-		if( !is_empty(merged) ){
-			merged->head->prev = i1;
-		}
-		i1->next = merged->head;
-		i1->prev = NULL;
-		merged->head = i1;
-		i1 = l1->head;
+		add_tail(merged, i1->data);
+		i1 = i1->next;
 	}
 	while (i2 != NULL)
 	{
-		// Transfer item from list2...
-		l2->head = l2->head->next;
-		if(	!is_empty(l2) ) {
-			l2->head->prev = NULL;
-		}
-		// ... to head of merged list
-		if( is_empty(merged) ){
-			merged->last = i2;
-		}
-		if( !is_empty(merged) ){
-			merged->head->prev = i2;
-		}
-		i2->next = merged->head;
-		i2->prev = NULL;
-		merged->head = i2;
-		i2 = l2->head;
+		add_tail(merged, i2->data);
+		i2 = i2->next;
 	}
 	
 	return merged;
