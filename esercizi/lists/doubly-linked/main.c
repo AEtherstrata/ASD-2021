@@ -6,23 +6,25 @@ int main()
 	list* test2 = new_list();
 	list* test3 = new_list();
 
-	add_tail(test1, 19);
-	add_before(test1, search(test1, 19), 9);
-	add_tail(test1, 29);
-	add_tail(test1, 59);
-	add_before(test1, search(test1, 59), 49);
-	add_after(test1, search(test1, 59), 69);
-	add_tail(test1, 79);
-	add_tail(test1, 89);
-	add_after(test1, search(test1, 29), 39);
+	insert_ordered(test1, 9);
+	insert_ordered(test1, 39);
+	insert_ordered(test1, 89);
+	insert_ordered(test1, 59);
+	insert_ordered(test1, 29);
+	insert_ordered(test1, 49);
+	insert_ordered(test1, 79);
+	insert_ordered(test1, 69);
 	print_list(test1);
+
 
 	test2 = reverse(test1);
 	print_list(test2);
 
-	list_enqueue(test1, test2);
-	print_list(test1);
+	test2 = sort(test2);
+	print_list(test2);
 
+	test3 = merge(test1, test2);
+	print_list(test3);
 	// Insert test code here
 
 	printf("Press enter to continue ");

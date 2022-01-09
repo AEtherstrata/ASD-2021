@@ -100,12 +100,12 @@ void add_before(list* l, listItem* i, int a)
 	}
 
 	listItem* add = allocate_object(a);
-	add->next = i;
-	add->prev = i->prev;
-	
+
 	if (i->prev != NULL) {
-		i->prev->next = add;
 		add->prev = i->prev;
+		add->next = i;
+		i->prev->next = add;
+		i->prev = add;
 		printf("%d has been added before %d.\n", add->data, i->data);
 	} else {
 		add_head(l, a);
@@ -120,10 +120,10 @@ void add_after(list* l, listItem* i, int a)
 	}
 
 	listItem* add = allocate_object(a);
-	add->prev = i;
-	add->next = i->next;
 
-	if (i->next != NULL){
+	if (i->next != NULL){		
+		add->prev = i;
+		add->next = i->next;
 		i->next->prev = add;
 		i->next = add;
 		printf("%d has been added after %d.\n", add->data, i->data);
@@ -207,4 +207,129 @@ void list_enqueue(list* l1, list* l2)
 		add_tail(l1, i->data);
 		i = i->next;
 	}
+}
+
+void insert_ordered(list* l, int a)
+{
+	if(is_empty(l)) {
+		add_head(l, a);
+		return;
+	}
+
+	listItem* i = l->head;
+	while ( i != NULL ) {
+		if(	i->data > a){
+			add_before(l, i ,a);
+			return;
+		}
+		if( i->next == NULL ){
+			add_tail(l, a);
+			return;
+		}
+		i = i->next;
+	}
+}
+
+list* sort(list* l)
+{
+	list* sorted = new_list();
+	listItem* i = l->head;
+
+	while (i != NULL) {
+		insert_ordered(sorted, i->data);
+		i = i->next;
+	}
+
+	empty(l);
+	return sorted;
+}
+
+list* merge(list* l1, list* l2)
+{
+	list* merged = new_list();
+	listItem* i1 = l1->head;
+	listItem* i2 = l2->head;
+
+	if (is_empty(l1) && is_empty(l2)) return NULL;
+
+	while (i1 != NULL && i2 != NULL)
+	{
+		if (i1->data <= i2->data) // Precedence yielded to list1
+		{
+			// Transfer item from list1...
+			l1->head = l1->head->next;
+			if(	!is_empty(l1) ) {
+				l1->head->prev = NULL;
+			}
+			// ... to head of merged list
+			if( is_empty(merged) ){
+				merged->last = i1;
+			}
+			if( !is_empty(merged) ){
+				merged->head->prev = i1;
+			}
+			i1->next = merged->head;
+			i1->prev = NULL;
+			merged->head = i1;
+			i1 = l1->head;
+		} else {		
+			// Transfer item from list2...
+			l2->head = l2->head->next;
+			if(	!is_empty(l2) ) {
+				l2->head->prev = NULL;
+			}
+			// ... to head of merged list
+			if( is_empty(merged) ){
+				merged->last = i2;
+			}
+			if( !is_empty(merged) ){
+				merged->head->prev = i2;
+			}
+			i2->next = merged->head;
+			i2->prev = NULL;
+			merged->head = i2;
+			i2 = l2->head;
+		}
+		
+	}
+	while (i1 != NULL)
+	{
+		// Transfer item from list1...
+		l1->head = l1->head->next;
+		if(	!is_empty(l1) ) {
+			l1->head->prev = NULL;
+		}
+		// ... to head of merged list
+		if( is_empty(merged) ){
+			merged->last = i1;
+		}
+		if( !is_empty(merged) ){
+			merged->head->prev = i1;
+		}
+		i1->next = merged->head;
+		i1->prev = NULL;
+		merged->head = i1;
+		i1 = l1->head;
+	}
+	while (i2 != NULL)
+	{
+		// Transfer item from list2...
+		l2->head = l2->head->next;
+		if(	!is_empty(l2) ) {
+			l2->head->prev = NULL;
+		}
+		// ... to head of merged list
+		if( is_empty(merged) ){
+			merged->last = i2;
+		}
+		if( !is_empty(merged) ){
+			merged->head->prev = i2;
+		}
+		i2->next = merged->head;
+		i2->prev = NULL;
+		merged->head = i2;
+		i2 = l2->head;
+	}
+	
+	return merged;
 }
