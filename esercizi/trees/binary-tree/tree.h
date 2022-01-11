@@ -42,4 +42,24 @@ node* right(node* node);
 
 node* left(node* node);
 
+int traversal_preorder(node* node, int value);
+
+int traversal_postorder(node* node, int value);
+
+int traversal_inorder(node* node, int value);
+
+int count(tree tree);
+
+int is_path(tree tree);
+
+int height(tree tree);
+
+int sum(tree tree);
+
+float average_bad(tree tree);
+
+void average_ric(tree t, int* s, int* c);
+
+float average(tree t);
+
 #endif

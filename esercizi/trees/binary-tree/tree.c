@@ -110,3 +110,109 @@ node* root(node* n)
 	
 	root(n->parent);
 }
+
+node* right(node* n)
+{
+	return n->right;
+}
+
+node* left(node* n)
+{
+	return n->left;
+}
+
+int traversal_preorder(node* n, int v)
+{
+	if(is_empty(n)) return 0;
+			
+	printf("%d has been processed.\n", n->data);
+	if(n->data == v) return 1;
+	
+	if (traversal_preorder(n->left, v)) return 1;
+	if (traversal_preorder(n->right, v)) return 1;
+
+	return 0;
+}
+
+int traversal_postorder(node* n, int v)
+{
+	if(is_empty(n)) return 0;
+
+	if (traversal_postorder(n->left, v)) return 1;
+	if (traversal_postorder(n->right, v)) return 1;
+
+	printf("%d has been processed.\n", n->data);
+	if(n->data == v) return 1;
+
+	return 0;
+}
+
+int traversal_inorder(node* n, int v)
+{
+	if(is_empty(n)) return 0;
+
+	if (traversal_inorder(n->left, v)) return 1;
+
+	printf("%d has been processed.\n", n->data);
+	if(n->data == v) return 1;
+
+	if (traversal_inorder(n->right, v)) return 1;
+
+	return 0;
+}
+
+int count(tree t)
+{
+	if(is_empty(t)) return 0;
+	return count(t->left) + count(t->right) + 1;
+}
+
+int is_path(tree t)
+{
+	if(is_empty(t)) return 1;
+	if((is_path(t->right) && t->left == NULL) || (t->right == NULL && is_path(t->left))) return 1;
+	return 0;
+}
+
+int height(tree t)
+{
+	if(is_empty(t)) return -1;
+
+	int l = height(t->left);
+	int r = height(t->right);
+	int max = 0;
+
+	if (l > r) max = l;
+	else max = r;
+
+	return max + 1;	
+}
+
+int sum(tree t)
+{
+	if(is_empty(t)) return 0;
+	return sum(t->right) + sum(t->left) + t->data;
+}
+
+
+float average_bad(tree t) {
+   return ((float)sum(t))/count(t);
+}
+
+void average_ric(tree t, int* s, int* c)
+{
+	if(is_empty(t)) return;
+
+	*s += t->data;
+	*c = *c + 1;
+
+	average_ric(t->left, s, c);
+	average_ric(t->right, s, c);
+}
+
+float average(tree t)
+{
+	int sum=0, count=0;
+	average_ric(t, &sum, &count);
+	return ((float)sum)/count;
+}
