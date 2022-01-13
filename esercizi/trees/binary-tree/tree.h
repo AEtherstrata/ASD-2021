@@ -20,9 +20,23 @@ void print_tree_ric(tree tree, int space);
 
 void print_tree(tree tree);
 
+void symmetrical_parenthetical_ric(tree tree);
+
+void symmetrical_parenthetical(tree tree);
+
+void preorder_parenthetical_ric(tree tree);
+
+void preorder_parenthetical(tree tree);
+
 node* allocate_node(int value);
 
 void set_root(tree* tree, int value);
+
+void dealloc(tree* tree);
+
+void trunk(tree* tree, node* node);
+
+void trunk_height(tree* tree, int height);
 
 node* add_left(node* node, int value);
 
@@ -32,7 +46,17 @@ int only_left(tree tree);
 
 int only_right(tree tree);
 
+int has_grandparent(node* node);
+
 int two_children(node* node);
+
+int two_children_count(tree t);
+
+int four_grandchildren(node* n);
+
+int four_grandchildren_count(tree t);
+
+int same_as_grandparent(tree tree);
 
 int is_empty(tree tree);
 
@@ -42,15 +66,23 @@ node* right(node* node);
 
 node* left(node* node);
 
+node* parent(tree tree, node* node);
+
 int traversal_preorder(node* node, int value);
 
 int traversal_postorder(node* node, int value);
 
 int traversal_inorder(node* node, int value);
 
+int binary_search(tree tree, int value);
+
 int count(tree tree);
 
 int is_path(tree tree);
+
+int is_leaf(tree tree);
+
+int is_complete(tree tree);
 
 int height(tree tree);
 

@@ -19,13 +19,57 @@ void print_tree_ric(tree t, int space)
 
 void print_tree(tree t)
 {
+	if(is_empty(t)) {
+		printf("Empty tree!\n");
+		return;
+	}
 	print_tree_ric(t, 0);
+	printf("\n");
+}
+
+void symmetrical_parenthetical_ric(tree t)
+{
+	if (is_empty(t)) return;
+	
+	if(is_leaf(t)) {
+		printf(" ()%d() ", t->data);
+		return;
+	}
+	printf("(");
+	symmetrical_parenthetical_ric(t->left);
+	printf("%d", t->data);
+	symmetrical_parenthetical_ric(t->right);
+	printf(")");
+}
+
+void preorder_parenthetical_ric(tree t)
+{
+	if (is_empty(t)) return;
+
+	if(is_leaf(t)) {
+		printf(" ()%d() ", t->data);
+		return;
+	}
+	printf("(");
+	printf("%d", t->data);	
+	preorder_parenthetical_ric(t->left);
+	preorder_parenthetical_ric(t->right);
+	printf(")");
+}
+
+void symmetrical_parenthetical(tree t){
+	symmetrical_parenthetical_ric(t);
+	printf("\n");
+}
+
+void preorder_parenthetical(tree t){
+	preorder_parenthetical_ric(t);
 	printf("\n");
 }
 
 node* allocate_node(int v)
 {
-	node* newNode = (node*)calloc(1, sizeof(node));
+	node* newNode = (node*)malloc(sizeof(node));
 	newNode->parent = NULL;
 	newNode->right = NULL;
 	newNode->left = NULL;
@@ -39,6 +83,40 @@ void set_root(tree* t, int v)
 	*t = newNode;
 	printf("New rooted tree initialized with value: %d\n", newNode->data);
 	print_tree(*t);
+}
+
+void dealloc(tree* t)
+{
+	if(is_empty(*t)) return;
+
+	dealloc(&(*t)->left);
+	dealloc(&(*t)->right);
+
+	free(*t);
+	(*t) = NULL;
+}
+
+void trunk(tree* t, node* n)
+{
+	if((*t) == n) {
+		dealloc(t);
+		return;
+	}
+
+	if(n->parent->left == n) dealloc(&(n->parent->left));
+	else if (n->parent->right == n) dealloc(&(n->parent->left));
+}
+
+void trunk_height(tree* t, int h)
+{
+	if (t == NULL) return;	
+	if (h == -1) {
+		dealloc (t);
+		return;
+	}
+
+	trunk_height(&(*t)->left, h-1);
+	trunk_height(&(*t)->right, h-1);
 }
 
 node* add_left(node* n, int v)
@@ -75,23 +153,66 @@ int only_left(tree t)
 {
 	if (is_empty(t)) return 1;	
 
-	if (t->right != NULL) printf("%d has a right child!\n", t->data);
+	if (t->right != NULL) {
+		printf("%d has a right child!\n", t->data);
+		return 0;
+	}
 
-	return only_left(t->left) && only_left(t->right) && (t->right == NULL);
+	return (only_left(t->left));
 }
 
 int only_right(tree t)
 {
 	if (is_empty(t)) return 1;
 
-	if (t->left != NULL) printf("%d has a left child!\n", t->data);
+	if (t->left != NULL) {
+		printf("%d has a left child!\n", t->data);
+		return 0;
+	}
 
-	return only_right(t->left) && only_right(t->right) && (t->left == NULL);
+	return (only_right(t->right));
+}
+
+int has_grandparent(node* n){
+	if (is_empty(n)) return 0;
+	if (n->parent == NULL) return 0;
+	if (n->parent->parent == NULL) return 0;
+
+	return 1;
 }
 
 int two_children(node* n)
 {
 	return n->right != NULL & n->left != NULL;
+}
+
+int two_children_count(tree t)
+{
+	if (is_empty(t)) return 0;
+	if (!two_children(t)) return 0;
+
+	return two_children_count(t->left) + two_children_count(t->right) + 1;
+}
+
+int four_grandchildren(node* n)
+{
+	if (is_empty(n)) return 0;
+	if (!two_children(n)) return 0;
+	if (two_children(n->left) && two_children(n->right)) return 1;
+	return 0;
+}
+
+int four_grandchildren_count(tree t)
+{
+	if (is_empty(t)) return 0;
+	return four_grandchildren(t) + four_grandchildren_count(t->left) + four_grandchildren_count(t->right);
+}
+
+int same_as_grandparent(tree t){
+	if (is_empty(t)) return 0;
+	if (has_grandparent(t) && t->parent->parent->data == t->data)
+		return same_as_grandparent(t->left) + same_as_grandparent(t->right) + 1;
+	return same_as_grandparent(t->left) + same_as_grandparent(t->right);
 }
 
 int is_empty(tree t)
@@ -119,6 +240,18 @@ node* right(node* n)
 node* left(node* n)
 {
 	return n->left;
+}
+
+node* parent(tree t, node* n)
+{
+	if(is_empty(t)) return NULL;
+
+	if (t->right == n || t->left == n) return t;
+	
+	node* p = parent(t->left, n);
+
+	if (p != NULL) return p;
+	else return parent(t->right, n);
 }
 
 int traversal_preorder(node* n, int v)
@@ -161,6 +294,19 @@ int traversal_inorder(node* n, int v)
 	return 0;
 }
 
+int binary_search(tree t, int v)
+{
+	if(is_empty(t)) return 0;
+	
+	printf("%d has been processed.\n", t->data);
+	if(t->data == v) return 1;
+	
+	if (v < t->data) return binary_search(t->left, v);
+	else return binary_search(t->right, v);
+
+	return 0;
+}
+
 int count(tree t)
 {
 	if(is_empty(t)) return 0;
@@ -172,6 +318,18 @@ int is_path(tree t)
 	if(is_empty(t)) return 1;
 	if((is_path(t->right) && t->left == NULL) || (t->right == NULL && is_path(t->left))) return 1;
 	return 0;
+}
+
+int is_leaf(tree t)
+{
+	return ((t->left == NULL) && (t->right == NULL));
+}
+
+int is_complete(tree t)
+{
+	if( t == NULL ) return 1;
+
+	return height(t->left) == height(t->right);
 }
 
 int height(tree t)
@@ -212,6 +370,7 @@ void average_ric(tree t, int* s, int* c)
 
 float average(tree t)
 {
+	if(is_empty(t)) return 0;
 	int sum=0, count=0;
 	average_ric(t, &sum, &count);
 	return ((float)sum)/count;
