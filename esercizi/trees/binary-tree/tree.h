@@ -6,6 +6,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "../../lists/doubly-linked/list.h"
+
 typedef struct NODE_STRUCT 
 {
 	struct NODE_STRUCT*		parent;
@@ -58,7 +60,7 @@ int four_grandchildren_count(tree t);
 
 int same_as_grandparent(tree tree);
 
-int is_empty(tree tree);
+int is_tree_empty(tree tree);
 
 node* root(node* node);
 
@@ -93,5 +95,11 @@ float average_bad(tree tree);
 void average_ric(tree t, int* s, int* c);
 
 float average(tree t);
+
+list* path(tree tree, node* node);
+
+int relatedness(tree t, node* n1, node* n2);
+
+tree copy_tree(tree t);
 
 #endif

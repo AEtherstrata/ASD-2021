@@ -64,6 +64,11 @@ int main()
 	printf("Average value: %f\n", average(test2));
 	printf("Is complete: %d\n", is_complete(test2));
 	printf("Parent of %d: %d\n\n", l4->data, parent(test2, l4)->data);
+	print_list(path(test2, r4));
+	printf("Relatedness of %d and %d: %d\n\n", l4->data, rr3->data, relatedness(test2, l4, rr3));
+	
+	tree testCopy = copy_tree(test2);
+	print_tree(testCopy);
 
 	tree test3 = NULL;
 	print_tree(test3);
