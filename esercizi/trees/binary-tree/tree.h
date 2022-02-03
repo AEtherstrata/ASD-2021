@@ -102,4 +102,8 @@ int relatedness(tree t, node* n1, node* n2);
 
 tree copy_tree(tree t);
 
+void height_as_info_ric(tree t, int* c, int h);
+
+int height_as_info(tree t);
+
 #endif

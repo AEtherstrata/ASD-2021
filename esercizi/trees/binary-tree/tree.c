@@ -456,3 +456,22 @@ tree copy_tree(tree t)
 		return t2;
 	}
 }
+
+void height_as_info_ric(tree t, int* c, int h)
+{
+	if (t == NULL) return;
+	
+	if (t->data == h) (*c)++;
+	
+	height_as_info_ric(t->left, c, ++h);
+	height_as_info_ric(t->right, c, ++h);
+
+	return;
+}
+
+int height_as_info(tree t)
+{
+	int count = 0;
+	height_as_info_ric(t, &count, 0);
+	return count;
+}

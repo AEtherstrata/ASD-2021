@@ -87,6 +87,15 @@ int main()
 	node* _3llll = add_left(_3lll, 3);
 	printf("Count of nodes that have same value as grandparent: %d\n", same_as_grandparent(test3));
 
+	tree test4 = NULL;
+	set_root(&test4, 0);
+	node* _4l = add_left(test4, 1);
+	node* _4ll = add_left(_4l, 2);
+	node* _4lll = add_left(_4ll, 3);
+	node* _4llll = add_left(_4lll, 3);
+	print_tree(test4);
+	printf("Number of nodes that have their data equal to their height: %d\n", height_as_info(test4));
+
 	printf("Press enter to continue ");
 	getchar();
 
