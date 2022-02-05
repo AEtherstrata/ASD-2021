@@ -12,7 +12,6 @@ int partition(int* a, int begin, int end)
 			i++;
 			swap(&a[i], &a[j]);
 		}
-
 	}
 
 	swap(&a[i+1], &a[end]);
@@ -32,7 +31,7 @@ void quick_sort(int* a, int begin, int end)
 	} 
 }
 
-void begin_quick_sort(int*a, int len)
+void begin_quick_sort(int* a, int len)
 {
 	quick_sort(a, 0, len-1);
 }
