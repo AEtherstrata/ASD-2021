@@ -41,14 +41,11 @@ int is_empty(list* l)
 void empty(list* l)
 {
 	listItem* p = l->head;
-
-	printf("Emptying the list:\n");
 	
 	while (l->head != NULL)
 	{
 		l->head = l->head->next;
  
-        printf("Deleting %d\n", p->data);
         free(p);
         p = l->head;
 	}
@@ -74,7 +71,6 @@ void add_head(list* l, int a)
 	if(is_empty(l)) l->last = add;
 	if(!is_empty(l)) l->head->prev = add;
 	l->head = add;
-	printf("%d has been added to the head.\n", add->data);
 }
 
 void add_tail(list* l, int a)
@@ -88,8 +84,6 @@ void add_tail(list* l, int a)
 	l->last->next = add;
 	add->prev = l->last;
 	l->last = add;
-
-	printf("%d has been added to the tail.\n", add->data);
 }
 
 void add_before(list* l, listItem* i, int a)
@@ -106,7 +100,6 @@ void add_before(list* l, listItem* i, int a)
 		add->next = i;
 		i->prev->next = add;
 		i->prev = add;
-		printf("%d has been added before %d.\n", add->data, i->data);
 	} else {
 		add_head(l, a);
 	}
@@ -126,7 +119,6 @@ void add_after(list* l, listItem* i, int a)
 		add->next = i->next;
 		i->next->prev = add;
 		i->next = add;
-		printf("%d has been added after %d.\n", add->data, i->data);
 	} else {
 		add_tail(l, a);
 	}
@@ -134,8 +126,6 @@ void add_after(list* l, listItem* i, int a)
 
 void delete_element(list* l, listItem* i)
 {
-	printf("%d has been deleted.\n\n", i->data);
-	
 	if( i == NULL ) return;
 
 	if (i->prev != NULL) {
