@@ -17,7 +17,7 @@ void bucket_sort(int* a, int len, int max)
 	// Add the values to the corresponding bucket
 	for (int i = 0; i < len; i++)
 	{
-		add_tail(bucketArray[a[i]], a[i]);
+		add_head(bucketArray[a[i]], a[i]);
 	}
 
 	// Now put the values from the bucket array to the right place
