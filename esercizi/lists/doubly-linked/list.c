@@ -20,7 +20,22 @@ listItem* allocate_object(int a)
 void print_list(list* l)
 {
 	if(is_empty(l)) {
-		printf("Empty list.\n\n");
+		printf("Empty list.\n");
+	} else {
+		listItem* i = l->head;
+		while (i->next != NULL)
+		{
+			printf("%d -> ", i->data);
+			i = i->next;
+		}
+		printf("%d\n", i->data);
+	}
+}
+
+void print_list_verbose(list* l)
+{
+	if(is_empty(l)) {
+		printf("Empty list.\n");
 	} else {
 		listItem* i = l->head;
 		while (i != NULL)

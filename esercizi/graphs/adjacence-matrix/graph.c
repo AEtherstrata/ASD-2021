@@ -29,11 +29,25 @@ void print_graph(graph* g)
 
 void add_oriented_edge(graph* g, int n1, int n2)
 {
+	if (n1 >= g->n || n1 >= g->n)
+	{
+		printf("%d --> %d\n", n1, n2);
+		printf("The specified edge is outside the scope of this graph! Exiting...\n");
+		exit(1);
+	}
+
 	g->matrix[n1][n2] = 1;
 }
 
 void add_not_oriented_edge(graph* g, int n1, int n2)
 {
+	if (n1 >= g->n || n1 >= g->n)
+	{
+		printf("%d <-> %d\n", n1, n2);
+		printf("The specified edge is outside the scope of this graph! Exiting...\n");
+		exit(1);
+	}
+
 	g->matrix[n1][n2] = 1;	
 	g->matrix[n2][n1] = 1;
 }
@@ -84,4 +98,15 @@ int entry_rank(graph* g, int n)
 		}		
 	}
 	return count;
+}
+
+int is_simple(graph* g)
+{
+	for (int i = 0; i < g->n; i++)
+	{
+		if (g->matrix[i][i]) {
+			return 0;
+		}
+	}
+	return 1;
 }

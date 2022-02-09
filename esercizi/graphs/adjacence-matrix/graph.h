@@ -27,9 +27,12 @@ void add_not_oriented_edge(graph* g, int n1, int n2);
 graph* resize_matrix(graph* graph, int new_size);
 
 // Get the exit rank of a node
-int exit_rank(graph* g, int n);
+int exit_rank(graph* graph, int node);
 
 // Get the entry rank of a node
-int entry_rank(graph* g, int n);
+int entry_rank(graph* graph, int node);
+
+// Check if the graph is a simple graph (has no loops)
+int is_simple(graph* graph);
 
 #endif

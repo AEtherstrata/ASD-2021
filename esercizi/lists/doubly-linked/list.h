@@ -21,6 +21,8 @@ listItem* allocate_object(int value);
 
 void print_list(list* l);
 
+void print_list_verbose(list* l);
+
 int is_empty(list* list);
 
 void empty(list* list);
