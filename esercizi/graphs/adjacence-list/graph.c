@@ -219,7 +219,11 @@ int check_for_complementary_nodes(graph* g1, graph* g2)
 
 	for (int i = 0; i < g1->n; i++)
 	{
-		if ((a1[i]==1 || a1[i]==-1) && (a2[i]==1 || a2[i]==-1) && (!(a1[i]==1 && a2[i]==-1) && !(a1[i]==-1 && a2[i]==1))) {
+		if ((a1[i]==1 || a1[i]==-1) 
+			&& (a2[i]==1 || a2[i]==-1) 
+			&& (!(a1[i]==1 && a2[i]==-1) 
+			&& !(a1[i]==-1 && a2[i]==1))) 
+		{
 			printf("%d is not complementary!\n", i);
 			return 0;
 		}
