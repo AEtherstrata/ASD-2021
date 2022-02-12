@@ -28,4 +28,14 @@ int bfs_connected(graph* graph);
 
 int bfs_component_count(graph* g);
 
+void depth_first_search_ric(node* node);
+
+void depth_first_search_color(node* node, int color);
+
+void depth_first_search(graph* g);
+
+void create_parent_array(treeNode* t, node* n);
+
+treeNode* parent_array(graph* g);
+
 #endif

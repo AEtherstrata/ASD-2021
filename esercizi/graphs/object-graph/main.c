@@ -35,5 +35,7 @@ int main()
 	printf("The graph is connected: %d\n", bfs_connected(test));
 	printf("Number of components: %d\n", bfs_component_count(test));
 
+	print_tree(parent_array(test));
+
 	return 0;
 }

@@ -214,3 +214,122 @@ int bfs_component_count(graph* g)
 	
 	return count;
 }
+
+void depth_first_search_ric(node* n)
+{
+	n->color = 1;		// Color the current node
+
+	/* Go through all edges and recall this function on the first uncolored node */
+
+	edgeList* edges = n->edges;
+
+	while (edges != NULL)
+	{
+		node* other;
+
+		if (edges->info->from == n)	{
+			other = edges->info->to;
+		} else {
+			other = edges->info->from;
+		}
+
+		/* If the discovered node has no color, start a new search */
+
+		if (other->color == 0)
+		{
+			depth_first_search_ric(other);
+		}
+
+		edges = edges->next;
+	}
+}
+
+void depth_first_search_color(node* n, int c)
+{
+	n->color = c;		// Color the current node
+
+	/* Go through all edges and recall this function on the first uncolored node */
+
+	edgeList* edges = n->edges;
+
+	while (edges != NULL)
+	{
+		node* other;
+
+		if (edges->info->from == n)	{
+			other = edges->info->to;
+		} else {
+			other = edges->info->from;
+		}
+
+		/* If the discovered node has no color, start a new search */
+
+		if (other->color == 0)
+		{
+			depth_first_search_color(other, c);
+		}
+
+		edges = edges->next;
+	}
+}
+
+void depth_first_search(graph* g)
+{
+	if (g->nodeCount == 0)
+	{
+		printf("The graph is empty! Exiting...\n");
+		exit(1);
+	}
+
+	decolor_graph(g);
+	depth_first_search_ric(g->nodes->info);
+}
+
+void create_parent_array(treeNode* t, node* n)
+{
+	n->color = 1;
+
+	/* Go through all edges and recall this function on the first uncolored node */
+
+	edgeList* edges = n->edges;
+
+	while (edges != NULL)
+	{
+		node* other;
+
+		if (edges->info->from == n)	{
+			other = edges->info->to;
+		} else {
+			other = edges->info->from;
+		}
+
+		/* If the discovered node has no color, start a new search */
+
+		if (other->color == 0)
+		{
+			add_child(t, other);
+			t = t->left;
+
+			create_parent_array(t, other);
+		}
+
+		edges = edges->next;
+	}
+}
+
+treeNode* parent_array(graph* g)
+{
+	if (g->nodeCount == 0)
+	{
+		printf("The graph is empty! Exiting...\n");
+		exit(1);
+	}
+
+	decolor_graph(g);
+
+	treeNode* root = allocate_node(g->nodes->info);
+	
+	create_parent_array(root, g->nodes->info);
+
+	return root;
+}
