@@ -33,7 +33,7 @@ int main()
 	print_graph(test);
 
 	printf("The graph is connected: %d\n", bfs_connected(test));
-	//printf("Number of components: %d\n", bfs_component_count(test));
+	printf("Number of components: %d\n", bfs_component_count(test));
 
 	return 0;
 }

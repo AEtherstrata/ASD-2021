@@ -197,9 +197,11 @@ int bfs_component_count(graph* g)
 		exit(1);
 	}
 
+	decolor_graph(g);
+	
 	int count = 0;
-
 	nodeList* x = g->nodes;
+
 	while (x != NULL)
 	{
 		if (x->info->color == 0)
