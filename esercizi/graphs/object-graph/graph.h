@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "queue.h"
+
 /* Forward declarations */
 
 typedef struct NODE_STRUCT node;
@@ -65,6 +67,8 @@ graph* new_graph();
 
 void print_graph(graph* graph);
 
+void decolor_graph(graph* graph);
+
 void insert_node(node* node, nodeList** list);
 
 void insert_edge(edge* edge, edgeList** list);
@@ -72,5 +76,11 @@ void insert_edge(edge* edge, edgeList** list);
 node* add_node(graph* graph, int id);
 
 edge* add_edge(graph* g, int id, node* from, node* to);
+
+void breadth_first_search(graph* g, node* n);
+
+int bfs_connected(graph* graph);
+
+int bfs_component_count(graph* g);
 
 #endif
