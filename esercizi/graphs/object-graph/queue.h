@@ -4,22 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/* Forward declarations */
-
-typedef struct NODE_STRUCT node;
-
-typedef struct GRAPH_STRUCT graph;
-
-/* * * * * * * * * * * */
-
-typedef	struct QUEUE_STRUCT {
-	
-	int			head;		
-	int			tail;		
-	node**		array;		
-	int			size;		
-
-} queue;
+#include "object.h"
 
 queue* new_queue(int size);
 
