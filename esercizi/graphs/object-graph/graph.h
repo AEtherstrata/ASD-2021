@@ -38,4 +38,6 @@ void create_parent_array(treeNode* t, node* n);
 
 treeNode* parent_array(graph* g);
 
+int biggest_compontent_node_count(graph* g);
+
 #endif

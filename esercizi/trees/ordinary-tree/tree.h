@@ -18,6 +18,8 @@ void print_tree_ric(tree t);
 
 void print_tree(tree t);
 
+void print_array(int* a, int len);
+
 node* allocate_node(int v);
 
 void set_root(tree* tree, int value);
@@ -27,5 +29,11 @@ int is_empty(tree t);
 node* add_child(node* node, int value);
 
 node* add_sibling(node* node, int value);
+
+int height(tree t);
+
+void nodes_depth_count(tree t, int h, int* a);
+
+int* count_nodes_foreach_depth_level(tree t, int h);
 
 #endif

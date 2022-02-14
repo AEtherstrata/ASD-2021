@@ -40,6 +40,14 @@ void print_graph(graph* g)
 	}
 }
 
+void print_array(int* a, int len)
+{
+	for (int i = 0; i < len; i++)
+	{
+		printf("[%d] = %d\n", i, a[i]);
+	}
+}
+
 void decolor_graph(graph* g)
 {
 	nodeList* x = g->nodes;
@@ -317,6 +325,7 @@ void create_parent_array(treeNode* t, node* n)
 	}
 }
 
+// Implies the graph is connected
 treeNode* parent_array(graph* g)
 {
 	if (g->nodeCount == 0)
@@ -332,4 +341,54 @@ treeNode* parent_array(graph* g)
 	create_parent_array(root, g->nodes->info);
 
 	return root;
+}
+
+int biggest_compontent_node_count(graph* g)
+{
+	if (g->nodeCount == 0)
+	{
+		printf("The graph is empty! Exiting...\n");
+		exit(1);
+	}
+
+	decolor_graph(g);
+
+	int color = 1;
+
+	depth_first_search_color(g->nodes->info, color);
+
+	nodeList* x = g->nodes;
+	while (x->info->color == 0)
+	{
+		color++;
+		depth_first_search_color(x->info, color);
+		x = x->next;
+	}
+	
+	int count = color+1;
+
+	int component[count];
+	for (int i = 0; i < count; i++)
+	{
+		component[i] = 0;
+	}
+	
+
+	x = g->nodes;
+	while (x != NULL)
+	{
+		printf("%d has color %d. Added to array\n", x->info->id, x->info->color);
+		component[x->info->color]++;
+		x = x->next;
+	}
+
+	print_array(component, count);
+	
+	int max = 0;
+	for (int i = 0; i < count; i++)
+	{
+		max = (component[i] > max) ? component[i] : max;
+	}
+	
+	return max;
 }

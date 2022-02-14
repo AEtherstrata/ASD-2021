@@ -27,6 +27,19 @@ void print_tree(tree t)
 	print_tree_ric(t);
 }
 
+void print_array(int* a, int len)
+{
+	if (len <= 0) {
+		printf("Empty array!\n");
+		return;
+	}
+
+	for (int i = 0; i < len; i++)
+	{
+		printf("[%d] = %d\n", i , a[i]);
+	}
+}
+
 node* allocate_node(int v)
 {
 	node* newNode = (node*)calloc(1, sizeof(node));
@@ -62,4 +75,80 @@ node* add_child(node* n, int v)
 	newNode->next = n->first;
 	n->first = newNode;
 	return newNode;
+}
+
+node* add_sibling(node* n, int v)
+{
+	if (is_empty(n))
+	{
+		printf("%d cannot be added: invalid sibling node!\n");
+		exit(1);
+	}
+
+	node* newNode = allocate_node(v);
+	newNode->parent = n->parent;
+	newNode->next = n->next;
+	n->next = newNode;
+
+	return newNode;
+}
+
+int height(tree t)
+{
+	if (t == NULL) return -1;
+	printf("Executing on %d\n", t->data);
+
+	int l = height(t->first);
+
+	int r = -1;
+
+	tree s = t->next;
+	while (s != NULL)
+	{
+		int rnew = height(s->first);
+		if (rnew > r)
+		{
+			r = rnew;
+		}
+		s = s->next;
+	}	
+
+	int max = (l > r) ? l : r;
+	
+	printf("Height of subtree:\n");
+	print_tree(t);
+	printf("Height == %d\n\n", max);
+
+	return max + 1;
+}
+
+void nodes_depth_count(tree t, int h, int* a)
+{
+	if (t == NULL) return;
+
+	if (t->first == NULL && t->next == NULL) {
+		a[h]++;
+		return;
+	}
+	
+	a[h]++;
+
+	nodes_depth_count(t->first, h+1, a);
+
+	tree s = t->next;
+	while (s != NULL)
+	{
+		a[h]++;
+		nodes_depth_count(s->first, h+1, a);
+		s = s->next;
+	}
+}
+
+int* count_nodes_foreach_depth_level(tree t, int h)
+{
+	int* count = (int*)calloc(h, sizeof(int));
+
+	nodes_depth_count(t, 0, count);
+
+	return count;
 }
