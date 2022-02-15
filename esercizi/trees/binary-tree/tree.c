@@ -196,6 +196,17 @@ int two_children_count(tree t)
 	return two_children_count(t->left) + two_children_count(t->right);
 }
 
+int two_leaves_count(tree t)
+{
+	if (is_tree_empty(t)) return 0;
+	if (t->right == NULL || t->left == NULL) return 0;
+
+	if (is_leaf(t->right) && is_leaf(t->left))
+		return two_leaves_count(t->left) + two_leaves_count(t->right);
+
+	return two_leaves_count(t->left) + two_leaves_count(t->right);
+}
+
 int four_grandchildren(node* n)
 {
 	if (is_tree_empty(n)) return 0;
@@ -340,10 +351,7 @@ int height(tree t)
 
 	int l = height(t->left);
 	int r = height(t->right);
-	int max = 0;
-
-	if (l > r) max = l;
-	else max = r;
+	int max = (l > r) ? l : r;
 
 	return max + 1;	
 }

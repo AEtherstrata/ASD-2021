@@ -54,6 +54,8 @@ int two_children(node* node);
 
 int two_children_count(tree t);
 
+int two_leaves_count(tree t);
+
 int four_grandchildren(node* n);
 
 int four_grandchildren_count(tree t);

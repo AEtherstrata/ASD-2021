@@ -20,7 +20,7 @@ int main()
 	printf("Parent of %d: %d\n", lr->data, parent(testTree, lr)->data);
 	printf("Only left: %d\n", only_left(testTree));
 	printf("Only right: %d\n\n", only_right(testTree));
-	
+
 	printf("150 is present (POST): %d\n\n", traversal_postorder(testTree, 150));
 	printf("150 is present (PRE): %d\n\n", traversal_preorder(testTree, 150));
 	printf("150 is present (SYM): %d\n\n", traversal_inorder(testTree, 150));
@@ -31,7 +31,8 @@ int main()
 	printf("The tree is a path: %d\n", is_path(testTree));
 	printf("Sum of values: %d\n", sum(testTree));
 	printf("Average value: %f\n", average(testTree));
-	printf("Is complete: %d\n\n", is_complete(testTree));	
+	printf("Is complete: %d\n", is_complete(testTree));
+	printf("Count of nodes which children are leaves: %d\n\n", two_leaves_count(testTree));
 	
 	printf("Trunk height to 1...\n");
 	trunk_height(&testTree, 1);
@@ -58,15 +59,16 @@ int main()
 	printf("Two children node count: %d\n", two_children_count(test2));
 	printf("Four grandchildren node count: %d\n", four_grandchildren_count(test2));
 	printf("Node count: %d\n", count(test2));
+	printf("Count of nodes which children are leaves: %d\n\n", two_leaves_count(test2));
 	printf("Tree height: %d\n", height(test2));
-	printf("The tree is a path: %d\n", is_path(test2));	
+	printf("The tree is a path: %d\n", is_path(test2));
 	printf("Sum of values: %d\n", sum(test2));
 	printf("Average value: %f\n", average(test2));
 	printf("Is complete: %d\n", is_complete(test2));
 	printf("Parent of %d: %d\n\n", l4->data, parent(test2, l4)->data);
 	print_list(path(test2, r4));
 	printf("Relatedness of %d and %d: %d\n\n", l4->data, rr3->data, relatedness(test2, l4, rr3));
-	
+
 	tree testCopy = copy_tree(test2);
 	print_tree(testCopy);
 
@@ -74,11 +76,11 @@ int main()
 	print_tree(test3);
 	printf("Node count: %d\n", count(test3));
 	printf("Tree height: %d\n", height(test3));
-	printf("The tree is a path: %d\n", is_path(test3));	
+	printf("The tree is a path: %d\n", is_path(test3));
 	printf("Sum of values: %d\n", sum(test3));
 	printf("Average value: %f\n", average(test3));
 	printf("Is complete: %d\n\n", is_complete(test3));
-	
+
 	set_root(&test3, 3);
 
 	node* _3l = add_left(test3, 3);
