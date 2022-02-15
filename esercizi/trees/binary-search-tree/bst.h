@@ -44,6 +44,8 @@ int is_tree_empty(bst t);
 
 int is_leaf(bst t);
 
+int height(bst t);
+
 int tree_insert(bst* t, bstNode* p, int k);
 
 int add_new_key(bst* t, int k);
@@ -75,5 +77,11 @@ int is_bst_pre(bst t);
 treeInfo* is_bst_post(bst t);
 
 int tree_sort(int* a, int len);
+
+int path_length(bst t, int v);
+
+void populate_parent_array(bst t, int* a, int h, int v);
+
+int* parent_array(bst t, int v);
 
 #endif

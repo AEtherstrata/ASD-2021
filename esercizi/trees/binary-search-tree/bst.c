@@ -392,3 +392,38 @@ int tree_sort(int* a, int len)
 
 	return is_sorted(a, len);
 }
+
+int path_length(bst t, int v)
+{
+	if (t == NULL) return -1;
+
+	if (t->key == v) return 1;
+
+	return 1 + ((t->key > v) ? path_length(t->left, v) : path_length(t->right, v));
+}
+
+
+void populate_parent_array(bst t, int* a, int h, int v)
+{
+	if (t == NULL) return;
+
+	a[h] = t->key;
+
+	if (t->key == v) return;
+
+	if (t->key > v)	populate_parent_array(t->left, a, h+1, v);
+	else populate_parent_array(t->right, a, h+1, v);
+}
+
+int* parent_array(bst t, int v)
+{
+	if (is_tree_empty(t)) return NULL;
+
+	int h = path_length(t, v);
+
+	int* parent = (int*)calloc(h, sizeof(int));
+
+	populate_parent_array(t, parent, 0, v);
+
+	return parent;
+}

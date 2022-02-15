@@ -72,6 +72,11 @@ int main()
 		printf("Tree sort BAD\n\n");
 	}
 
+	printf("Tree height: %d\n", height(t1));
+	printf("Path length of 22 is: %d\n", path_length(t1, 22));
+	printf("Parent array of 22:\n");
+	print_array(parent_array(t1, 22), path_length(t1, 22));
+
 	printf("Press enter to continue ");
 	getchar();
 
