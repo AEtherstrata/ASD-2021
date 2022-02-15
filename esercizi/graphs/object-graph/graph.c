@@ -365,19 +365,17 @@ int biggest_compontent_node_count(graph* g)
 		x = x->next;
 	}
 	
-	int count = color+1;
+	int count = color+1;	// Account for colorless state (offset+1)
 
 	int component[count];
 	for (int i = 0; i < count; i++)
 	{
 		component[i] = 0;
 	}
-	
 
 	x = g->nodes;
 	while (x != NULL)
 	{
-		printf("%d has color %d. Added to array\n", x->info->id, x->info->color);
 		component[x->info->color]++;
 		x = x->next;
 	}

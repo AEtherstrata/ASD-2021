@@ -96,30 +96,45 @@ node* add_sibling(node* n, int v)
 int height(tree t)
 {
 	if (t == NULL) return -1;
-	printf("Executing on %d\n", t->data);
 
 	int l = height(t->first);
 
 	int r = -1;
-
 	tree s = t->next;
+
 	while (s != NULL)
 	{
 		int rnew = height(s->first);
-		if (rnew > r)
-		{
-			r = rnew;
-		}
+		r = (rnew > r) ? rnew : r;
 		s = s->next;
 	}	
 
 	int max = (l > r) ? l : r;
-	
-	printf("Height of subtree:\n");
-	print_tree(t);
-	printf("Height == %d\n\n", max);
 
 	return max + 1;
+}
+
+int is_leaf(tree t)
+{
+	return (t->first == NULL);
+}
+
+int leaves_count(tree t)
+{
+	if (is_empty(t)) return 0;
+
+	int count = 0;
+
+	if (is_leaf(t)) count++;
+
+	tree x = t->next;
+	while (x != NULL)
+	{		
+		count += leaves_count(x);
+		x = x->next;
+	}
+	
+	return count + leaves_count(t->first);
 }
 
 void nodes_depth_count(tree t, int h, int* a)

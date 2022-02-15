@@ -32,6 +32,10 @@ node* add_sibling(node* node, int value);
 
 int height(tree t);
 
+int is_leaf(tree t);
+
+int leaves_count(tree t);
+
 void nodes_depth_count(tree t, int h, int* a);
 
 int* count_nodes_foreach_depth_level(tree t, int h);

@@ -30,14 +30,14 @@ int main()
 	print_list(test3);
 
 	insert_ordered(test4, 9);
-	insert_ordered(test4, 39);
-	insert_ordered(test4, 89);
-	insert_ordered(test4, 59);
-	insert_ordered(test4, 29);
-	insert_ordered(test4, 49);
-	insert_ordered(test4, 79);
-	insert_ordered(test4, 69);
-	add_tail(test4, 9);
+	insert_ordered(test4, 2);
+	insert_ordered(test4, 0);
+	insert_ordered(test4, 2);
+	insert_ordered(test4, 5);
+	insert_ordered(test4, 6);
+	insert_ordered(test4, 4);
+	insert_ordered(test4, 8);
+	add_head(test4, 9);
 
 	print_list(test4);
 	printf("Last is equal to first value: %d\n", first_equals_last(test4));

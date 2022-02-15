@@ -21,5 +21,7 @@ int main()
 	printf("Node count for each depth level:\n");
 	print_array(count_nodes_foreach_depth_level(test, h+1), h+1);
 
+	printf("Leaves count: %d\n\n", leaves_count(test));
+
 	return 0;
 }
