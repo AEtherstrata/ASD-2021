@@ -1,4 +1,5 @@
 #include "bst.h"
+#include "avl-tree.h"
 
 void add_key(bst* t, int k)
 {
@@ -71,6 +72,9 @@ int main()
 	} else {
 		printf("Tree sort BAD\n\n");
 	}
+
+	right_rotate(iterative_bst_search(t1, 74));
+	print_tree(t1);
 
 	printf("Press enter to continue ");
 	getchar();

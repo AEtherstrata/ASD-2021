@@ -98,6 +98,17 @@ int is_leaf(bst t)
 	return ((t->left == NULL) && (t->right == NULL));
 }
 
+int height(bst t)
+{
+	if(is_tree_empty(t)) return -1;
+
+	int l = height(t->left);
+	int r = height(t->right);
+	int max = (l > r) ? l : r;
+
+	return max + 1;
+}
+
 int tree_insert(bst* t, bstNode* p, int k)
 {
 	if ( (*t) == NULL ) //tree is empty, creating the first node
@@ -173,17 +184,15 @@ void bst_bypass(bst t, bst x)
 {
 	bstNode* child = NULL;
 
-	if (x->left != NULL) {
-		child = x->left;
-	}
-	else {
-		child = x->right;
-	}
-
+	// Store the child
+	child = (x->left != NULL) ? x->left : x->right;
+	
+	// Point it to the grandparent
 	if (child != NULL) {
 		child->parent = x->parent;
 	}
 	
+
 	if (x->parent != NULL) {
 		if (x == x->parent->left) {
 			x->parent->left = child;
@@ -225,14 +234,7 @@ bstNode* iterative_bst_search(bst t, int k)
 {
 	while (t != NULL && k != t->key)
 	{
-		if (k < t->key)
-		{
-			t = t->left;
-		}
-		else 
-		{
-			t = t->right;
-		}
+		t = (k < t->key) ? t->left : t->right;
 	}
 	return t;
 }

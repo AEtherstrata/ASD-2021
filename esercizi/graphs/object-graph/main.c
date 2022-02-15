@@ -12,7 +12,7 @@ int main()
 
 	nodes[0] = add_node(test, 69);
 	nodes[1] = add_node(test, 34);
-	nodes[2] = add_node(test, 727);	
+	nodes[2] = add_node(test, 727);
 	nodes[3] = add_node(test, 10);
 	nodes[4] = add_node(test, 44);
 	nodes[5] = add_node(test, 21);
