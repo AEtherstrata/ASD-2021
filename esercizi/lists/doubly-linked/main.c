@@ -5,6 +5,7 @@ int main()
 	list* test1 = new_list();
 	list* test2 = new_list();
 	list* test3 = new_list();
+	list* test4 = new_list();
 
 	insert_ordered(test1, 9);
 	insert_ordered(test1, 39);
@@ -27,7 +28,19 @@ int main()
 
 	test3 = merge(test1, test2);
 	print_list(test3);
-	// Insert test code here
+
+	insert_ordered(test4, 9);
+	insert_ordered(test4, 39);
+	insert_ordered(test4, 89);
+	insert_ordered(test4, 59);
+	insert_ordered(test4, 29);
+	insert_ordered(test4, 49);
+	insert_ordered(test4, 79);
+	insert_ordered(test4, 69);
+	add_tail(test4, 9);
+
+	print_list(test4);
+	printf("Last is equal to first value: %d\n", first_equals_last(test4));
 
 	printf("Press enter to continue ");
 	getchar();

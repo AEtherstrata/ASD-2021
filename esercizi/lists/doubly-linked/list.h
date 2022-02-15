@@ -57,4 +57,8 @@ list* sort(list* l);
 
 list* merge(list* l1, list* l2);
 
+int first_equals_last(list* l);
+
+int first_equals_last_no_pointer(list* l);
+
 #endif

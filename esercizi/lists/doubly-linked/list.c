@@ -64,8 +64,6 @@ void empty(list* l)
         free(p);
         p = l->head;
 	}
-
-	print_list(l);
 }
 
 listItem* search(list* l, int a)
@@ -281,4 +279,35 @@ list* merge(list* l1, list* l2)
 	}
 	
 	return merged;
+}
+
+int first_equals_last(list* l)
+{
+	if (is_empty(l))
+	{
+		printf("The list is empty! Exiting...\n");
+		exit(1);
+	}
+	
+	int first = l->head->data;
+	int last = l->last->data;
+
+	return (first == last) ? 1 : 0;
+}
+
+int first_equals_last_no_pointer(list* l)
+{
+	if (is_empty(l))
+	{
+		printf("The list is empty! Exiting...\n");
+		exit(1);
+	}
+
+	listItem* x = l->head;
+	while (x->next != NULL)
+	{
+		x = x->next;
+	}
+
+	return (l->head->data == x->data) ? 1 : 0;
 }
