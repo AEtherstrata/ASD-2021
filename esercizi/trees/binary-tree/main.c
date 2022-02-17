@@ -19,7 +19,8 @@ int main()
 	printf("Four grandchildren node count: %d\n", four_grandchildren_count(testTree));
 	printf("Parent of %d: %d\n", lr->data, parent(testTree, lr)->data);
 	printf("Only left: %d\n", only_left(testTree));
-	printf("Only right: %d\n\n", only_right(testTree));
+	printf("Only right: %d\n", only_right(testTree));
+	printf("Count of nodes that have only one child: %d\n\n", count_one_child_nodes(testTree));
 
 	printf("150 is present (POST): %d\n\n", traversal_postorder(testTree, 150));
 	printf("150 is present (PRE): %d\n\n", traversal_preorder(testTree, 150));
@@ -56,6 +57,7 @@ int main()
 	printf("Only left: %d\n", only_left(test2));
 	printf("Only right: %d\n\n", only_right(test2));
 
+	printf("Count of nodes that have only one child: %d\n\n", count_one_child_nodes(test2));
 	printf("Two children node count: %d\n", two_children_count(test2));
 	printf("Four grandchildren node count: %d\n", four_grandchildren_count(test2));
 	printf("Node count: %d\n", count(test2));
@@ -69,8 +71,10 @@ int main()
 	print_list(path(test2, r4));
 	printf("Relatedness of %d and %d: %d\n\n", l4->data, rr3->data, relatedness(test2, l4, rr3));
 
+	printf("][ Test copy tree\n\n");
 	tree testCopy = copy_tree(test2);
 	print_tree(testCopy);
+	printf("][ Test copy tree\n\n");
 
 	tree test3 = NULL;
 	print_tree(test3);
@@ -80,6 +84,7 @@ int main()
 	printf("Sum of values: %d\n", sum(test3));
 	printf("Average value: %f\n", average(test3));
 	printf("Is complete: %d\n\n", is_complete(test3));
+	printf("Count of nodes that have only one child: %d\n\n", count_one_child_nodes(test3));
 
 	set_root(&test3, 3);
 
@@ -97,6 +102,7 @@ int main()
 	node* _4llll = add_left(_4lll, 3);
 	print_tree(test4);
 	printf("Number of nodes that have their data equal to their height: %d\n", height_as_info(test4));
+	printf("Count of nodes that have only one child: %d\n\n", count_one_child_nodes(test4));
 
 	printf("Press enter to continue ");
 	getchar();

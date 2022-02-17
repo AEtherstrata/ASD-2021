@@ -121,20 +121,15 @@ int is_leaf(tree t)
 
 int leaves_count(tree t)
 {
-	if (is_empty(t)) return 0;
+	if (is_empty(t)) return 0;    // If the input is not valid do nothing
 
-	int count = 0;
+	int count = 0;    // Create a counter
 
-	if (is_leaf(t)) count++;
+	if (is_leaf(t)) count++;    // Check the input node
 
-	tree x = t->next;
-	while (x != NULL)
-	{		
-		count += leaves_count(x);
-		x = x->next;
-	}
-	
-	return count + leaves_count(t->first);
+	count += leaves_count(t->next);    // Check the first sibling
+
+	return count + leaves_count(t->first);    // Go down
 }
 
 void nodes_depth_count(tree t, int h, int* a)

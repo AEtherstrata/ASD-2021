@@ -25,7 +25,7 @@ void print_graph(graph* g)
 			x = x->next;
 		}
 	}
-	
+
 	if (g->edgeCount > 0)
 	{
 		printf("\nEdge list:\n");
@@ -80,12 +80,12 @@ void insert_edge(edge* edge, edgeList** list)
 	listItem->info = edge;
 	listItem->prev = NULL;
 	listItem->next = (*list);
-	
+
 	if ((*list) != NULL)
 	{
 		(*list)->prev = listItem;
 	}
-	
+
 	(*list) = listItem;
 }
 
@@ -100,7 +100,7 @@ node* add_node(graph* g, int id)
 	/* Add the new node to the head of the nodes list */
 	insert_node(n, &(g->nodes));
 
-	g->nodeCount++; 
+	g->nodeCount++;
 	return n;
 }
 
@@ -141,7 +141,7 @@ void breadth_first_search(graph* g, node* n)
 	n->color = 1;
 	enqueue(q, n);
 
-	/* 	Until no more new nodes are discovered, 
+	/* 	Until no more new nodes are discovered,
 		search and color the adjacent nodes     */
 
 	while (!is_queue_empty(q))
@@ -182,7 +182,7 @@ int bfs_connected(graph* g)
 		printf("The graph is empty! Exiting...\n");
 		exit(1);
 	}
-	
+
 	breadth_first_search(g, g->nodes->info);
 
 	nodeList* x = g->nodes;
@@ -193,7 +193,7 @@ int bfs_connected(graph* g)
 		}
 		x = x->next;
 	}
-	
+
 	return 1;
 }
 
@@ -206,7 +206,7 @@ int bfs_component_count(graph* g)
 	}
 
 	decolor_graph(g);
-	
+
 	int count = 0;
 	nodeList* x = g->nodes;
 
@@ -214,17 +214,19 @@ int bfs_component_count(graph* g)
 	{
 		if (x->info->color == 0)
 		{
-			count++;
 			breadth_first_search(g, x->info);
+			count++;
 		}
 		x = x->next;
 	}
-	
+
 	return count;
 }
 
 void depth_first_search_ric(node* n)
 {
+	if (n->color != 0) return;
+
 	n->color = 1;		// Color the current node
 
 	/* Go through all edges and recall this function on the first uncolored node */
@@ -233,20 +235,11 @@ void depth_first_search_ric(node* n)
 
 	while (edges != NULL)
 	{
-		node* other;
-
-		if (edges->info->from == n)	{
-			other = edges->info->to;
-		} else {
-			other = edges->info->from;
-		}
+		node* other = (edges->info->from == n) ? edges->info->to : edges->info->from;
 
 		/* If the discovered node has no color, start a new search */
 
-		if (other->color == 0)
-		{
-			depth_first_search_ric(other);
-		}
+		depth_first_search_ric(other);
 
 		edges = edges->next;
 	}
@@ -254,6 +247,8 @@ void depth_first_search_ric(node* n)
 
 void depth_first_search_color(node* n, int c)
 {
+	if (n->color != 0) return;
+
 	n->color = c;		// Color the current node
 
 	/* Go through all edges and recall this function on the first uncolored node */
@@ -262,20 +257,11 @@ void depth_first_search_color(node* n, int c)
 
 	while (edges != NULL)
 	{
-		node* other;
-
-		if (edges->info->from == n)	{
-			other = edges->info->to;
-		} else {
-			other = edges->info->from;
-		}
+		node* other = (edges->info->from == n) ? edges->info->to : edges->info->from;
 
 		/* If the discovered node has no color, start a new search */
 
-		if (other->color == 0)
-		{
-			depth_first_search_color(other, c);
-		}
+		depth_first_search_color(other, c);
 
 		edges = edges->next;
 	}
@@ -303,13 +289,7 @@ void create_parent_array(treeNode* t, node* n)
 
 	while (edges != NULL)
 	{
-		node* other;
-
-		if (edges->info->from == n)	{
-			other = edges->info->to;
-		} else {
-			other = edges->info->from;
-		}
+		node* other = (edges->info->from == n) ? edges->info->to : edges->info->from;
 
 		/* If the discovered node has no color, start a new search */
 
@@ -337,7 +317,7 @@ treeNode* parent_array(graph* g)
 	decolor_graph(g);
 
 	treeNode* root = allocate_node(g->nodes->info);
-	
+
 	create_parent_array(root, g->nodes->info);
 
 	return root;
@@ -353,25 +333,21 @@ int biggest_compontent_node_count(graph* g)
 
 	decolor_graph(g);
 
-	int color = 1;
-
-	depth_first_search_color(g->nodes->info, color);
+	int color = 0;
 
 	nodeList* x = g->nodes;
-	while (x->info->color == 0)
+	while (x != NULL)
 	{
-		color++;
-		depth_first_search_color(x->info, color);
+		if (x->info->color == 0)
+		{
+			color++;
+			depth_first_search_color(x->info, color);
+		}
 		x = x->next;
 	}
-	
-	int count = color+1;	// Account for colorless state (offset+1)
 
+	int count = color+1;	// Account for colorless state (offset+1)
 	int component[count];
-	for (int i = 0; i < count; i++)
-	{
-		component[i] = 0;
-	}
 
 	x = g->nodes;
 	while (x != NULL)
@@ -381,12 +357,62 @@ int biggest_compontent_node_count(graph* g)
 	}
 
 	print_array(component, count);
-	
+
 	int max = 0;
 	for (int i = 0; i < count; i++)
 	{
 		max = (component[i] > max) ? component[i] : max;
 	}
-	
+
 	return max;
+}
+
+int dfs_component_count(graph* g)
+{
+	if (g->nodeCount == 0)
+	{
+		printf("The graph is empty! Exiting...\n");
+		exit(1);
+	}
+
+	decolor_graph(g);
+
+	int count = 0;
+	nodeList* x = g->nodes;
+
+	while (x != NULL)
+	{
+		if (x->info->color == 0)
+		{
+			depth_first_search_ric(x->info);
+			count++;
+		}
+		x = x->next;
+	}
+
+	return count;
+}
+
+void color_all_nodes(graph* g)
+{
+	if (g->nodeCount == 0)
+	{
+		printf("The graph is empty! Exiting...\n");
+		exit(1);
+	}
+
+	decolor_graph(g);
+
+	int color = 1;
+
+	nodeList* x = g->nodes;
+	while (x != NULL)
+	{
+		if (x->info->color == 0)
+		{
+			depth_first_search_color(x->info, color);
+			color++;
+		}
+		x = x->next;
+	}
 }

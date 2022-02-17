@@ -48,6 +48,8 @@ int only_left(tree tree);
 
 int only_right(tree tree);
 
+int one_child(tree tree);
+
 int has_grandparent(node* node);
 
 int two_children(node* node);
@@ -107,5 +109,7 @@ tree copy_tree(tree t);
 void height_as_info_ric(tree t, int* c, int h);
 
 int height_as_info(tree t);
+
+int count_one_child_nodes(tree t);
 
 #endif

@@ -11,6 +11,7 @@ int main()
 	node* g2 = add_child(t2, 220);
 	node* ss4 = add_sibling(g2, 404);
 	node* ss2 = add_sibling(g1, 300);
+	node* ss3 = add_sibling(g1, 400);
 
 	print_tree(test);
 

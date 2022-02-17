@@ -40,4 +40,8 @@ treeNode* parent_array(graph* g);
 
 int biggest_compontent_node_count(graph* g);
 
+int dfs_component_count(graph* g);
+
+void color_all_nodes(graph* g);
+
 #endif

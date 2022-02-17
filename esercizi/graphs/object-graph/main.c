@@ -23,8 +23,8 @@ int main()
 	edges[1] = add_edge(test, 15, nodes[6], nodes[7]);
 	edges[2] = add_edge(test, 65, nodes[3], nodes[4]);
 	edges[3] = add_edge(test, 77, nodes[3], nodes[0]);
-	edges[4] = add_edge(test, 21, nodes[5], nodes[1]);
-	edges[5] = add_edge(test, 62, nodes[2], nodes[1]);
+	//edges[4] = add_edge(test, 21, nodes[5], nodes[1]);
+	//edges[5] = add_edge(test, 62, nodes[2], nodes[1]);
 	edges[6] = add_edge(test, 59, nodes[0], nodes[6]);
 	edges[7] = add_edge(test, 32, nodes[4], nodes[4]);
 	edges[8] = add_edge(test, 11, nodes[1], nodes[5]);
@@ -33,8 +33,12 @@ int main()
 	print_graph(test);
 
 	printf("The graph is connected: %d\n", bfs_connected(test));
-	printf("Number of components: %d\n", bfs_component_count(test));
+	printf("Number of components: %d\n", dfs_component_count(test));
 	printf("Biggest component node count: %d\n", biggest_compontent_node_count(test));
+
+	printf("Graph color\n");
+	color_all_nodes(test);
+	print_graph(test);
 
 	print_tree(parent_array(test));
 

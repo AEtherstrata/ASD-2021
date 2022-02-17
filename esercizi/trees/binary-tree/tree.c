@@ -173,6 +173,13 @@ int only_right(tree t)
 	return (only_right(t->right));
 }
 
+int one_child(tree t)
+{
+	if (t == NULL) return 0;
+	if (t->left != NULL && t->right != NULL) return 0;
+	return (t->left != NULL || t->right != NULL);
+}
+
 int has_grandparent(node* n){
 	if (is_tree_empty(n)) return 0;
 	if (n->parent == NULL) return 0;
@@ -482,4 +489,10 @@ int height_as_info(tree t)
 	int count = 0;
 	height_as_info_ric(t, &count, 0);
 	return count;
+}
+
+int count_one_child_nodes(tree t)
+{
+	if (t == NULL) return 0;
+	return one_child(t) + count_one_child_nodes(t->right) + count_one_child_nodes(t->left);
 }
