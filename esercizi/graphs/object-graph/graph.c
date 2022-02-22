@@ -40,11 +40,11 @@ void print_graph(graph* g)
 	}
 }
 
-void print_array(int* a, int len)
+void print_array(compArray* a)
 {
-	for (int i = 0; i < len; i++)
+	for (int i = 0; i < a->len; i++)
 	{
-		printf("[%d] = %d\n", i, a[i]);
+		printf("[%d] = %d\n", i, a->array[i]);
 	}
 }
 
@@ -177,7 +177,7 @@ void breadth_first_search(graph* g, node* n)
 
 int bfs_connected(graph* g)
 {
-	if (g->nodeCount == 0)
+	if (g == NULL)
 	{
 		printf("The graph is empty! Exiting...\n");
 		exit(1);
@@ -199,7 +199,7 @@ int bfs_connected(graph* g)
 
 int bfs_component_count(graph* g)
 {
-	if (g->nodeCount == 0)
+	if (g == NULL)
 	{
 		printf("The graph is empty! Exiting...\n");
 		exit(1);
@@ -269,7 +269,7 @@ void depth_first_search_color(node* n, int c)
 
 void depth_first_search(graph* g)
 {
-	if (g->nodeCount == 0)
+	if (g == NULL)
 	{
 		printf("The graph is empty! Exiting...\n");
 		exit(1);
@@ -308,7 +308,7 @@ void create_parent_array(treeNode* t, node* n)
 // Implies the graph is connected
 treeNode* parent_array(graph* g)
 {
-	if (g->nodeCount == 0)
+	if (g == NULL)
 	{
 		printf("The graph is empty! Exiting...\n");
 		exit(1);
@@ -325,43 +325,12 @@ treeNode* parent_array(graph* g)
 
 int biggest_compontent_node_count(graph* g)
 {
-	if (g->nodeCount == 0)
-	{
-		printf("The graph is empty! Exiting...\n");
-		exit(1);
-	}
-
-	decolor_graph(g);
-
-	int color = 0;
-
-	nodeList* x = g->nodes;
-	while (x != NULL)
-	{
-		if (x->info->color == 0)
-		{
-			color++;
-			depth_first_search_color(x->info, color);
-		}
-		x = x->next;
-	}
-
-	int count = color+1;	// Account for colorless state (offset+1)
-	int component[count];
-
-	x = g->nodes;
-	while (x != NULL)
-	{
-		component[x->info->color]++;
-		x = x->next;
-	}
-
-	print_array(component, count);
+	compArray* data = component_count_array(g);
 
 	int max = 0;
-	for (int i = 0; i < count; i++)
+	for (int i = 0; i < data->len; i++)
 	{
-		max = (component[i] > max) ? component[i] : max;
+		max = (data->array[i] > max) ? data->array[i] : max;
 	}
 
 	return max;
@@ -369,7 +338,7 @@ int biggest_compontent_node_count(graph* g)
 
 int dfs_component_count(graph* g)
 {
-	if (g->nodeCount == 0)
+	if (g == NULL)
 	{
 		printf("The graph is empty! Exiting...\n");
 		exit(1);
@@ -384,8 +353,8 @@ int dfs_component_count(graph* g)
 	{
 		if (x->info->color == 0)
 		{
-			depth_first_search_ric(x->info);
 			count++;
+			depth_first_search_color(x->info, count);
 		}
 		x = x->next;
 	}
@@ -395,7 +364,7 @@ int dfs_component_count(graph* g)
 
 void color_all_nodes(graph* g)
 {
-	if (g->nodeCount == 0)
+	if (g == NULL)
 	{
 		printf("The graph is empty! Exiting...\n");
 		exit(1);
@@ -403,16 +372,39 @@ void color_all_nodes(graph* g)
 
 	decolor_graph(g);
 
-	int color = 1;
-
+	int color = 0;
 	nodeList* x = g->nodes;
+
 	while (x != NULL)
 	{
 		if (x->info->color == 0)
 		{
-			depth_first_search_color(x->info, color);
 			color++;
+			depth_first_search_color(x->info, color);
 		}
 		x = x->next;
 	}
+}
+
+compArray* component_count_array(graph* g)
+{
+	if (g == NULL)
+	{
+		printf("The graph is empty! Exiting...\n");
+		exit(1);
+	}
+
+	compArray* component_array = (compArray*)malloc(sizeof(compArray));
+
+	component_array->len = dfs_component_count(g)+1;
+	component_array->array = (int*)calloc(component_array->len, sizeof(int));
+
+	nodeList* x = g->nodes;
+	while (x != NULL)
+	{
+		component_array->array[x->info->color]++;
+		x = x->next;
+	}
+
+	return component_array;
 }

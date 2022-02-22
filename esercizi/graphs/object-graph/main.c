@@ -34,13 +34,14 @@ int main()
 
 	printf("The graph is connected: %d\n", bfs_connected(test));
 	printf("Number of components: %d\n", dfs_component_count(test));
-	printf("Biggest component node count: %d\n", biggest_compontent_node_count(test));
+	printf("Biggest component node count: %d\n\n", biggest_compontent_node_count(test));
 
-	printf("Graph color\n");
 	color_all_nodes(test);
 	print_graph(test);
 
 	print_tree(parent_array(test));
+
+	print_array(component_count_array(test));
 
 	return 0;
 }

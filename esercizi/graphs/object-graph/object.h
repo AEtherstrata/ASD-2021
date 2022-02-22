@@ -33,6 +33,13 @@ typedef	struct QUEUE_STRUCT {
 
 } queue;
 
+typedef struct COMPONENT_ARRAY {
+
+	int*		array;
+	int			len;
+
+} compArray;
+
 /* Minimal implementation of a graph structure */
 
 typedef struct NODE_STRUCT {
@@ -46,7 +53,7 @@ typedef struct NODE_STRUCT {
 
 typedef struct EDGE_STRUCT {
 
-	int				id;	
+	int				id;
 	node*			from;		// Source node pointer
 	node*			to;			// Target node pointer
 	edgeList*		pos;		// Position of this edge in the graph edges list
@@ -60,7 +67,7 @@ typedef struct NODE_LIST {
 	node*			info;
 	nodeList*		next;
 	nodeList*		prev;
-	
+
 } nodeList;
 
 typedef struct EDGE_LIST {
